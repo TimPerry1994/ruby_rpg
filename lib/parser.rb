@@ -21,10 +21,15 @@ end
 
 class Parser
   def self.peek(word_list)
+    begin
+      if word_list
+        word = word_list[0]
+        return word[0]
+      else
+        return nil
+      end
+    rescue NoMethodError
 
-    if word_list
-      word = word_list[0]
-      return word[0]
     else
       return nil
     end
