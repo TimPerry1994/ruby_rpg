@@ -107,7 +107,7 @@ class Woods < Scene
         stick_scenario(choice.verb)
 
       elsif Lexicon.instance_variable_get(:@movements).include?(choice.verb) && Lexicon.instance_variable_get(:@compass).include?(choice.object)
-        if choice.object == @bear_position
+        if choice.object == @bear_position && @bear_alive == true
           puts "You run into the bear."
           bear_fight
         elsif choice.object == 'north'

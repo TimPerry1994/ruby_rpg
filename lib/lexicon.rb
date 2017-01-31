@@ -9,7 +9,7 @@ class Lexicon
     @throws = %w[throw hurl chuck lob]
     @movements = %w[go run walk stroll]
     @stop_words = %w[the in of from at it to]
-    @nouns = %w[bear tree trees grass ground floor player princess door cabinet ibberis]
+    @nouns = %w[bear tree trees grass floor player crypt ibberis]
     @selfs = %w[me self myself]
     @weapons = %w[stick]
     @armors = %w[jerkin]

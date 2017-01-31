@@ -37,6 +37,9 @@ class Character
 
   def hurt(number)
     total = number - (@defense/2)
+    if total <= 0
+      total = 1
+    end
     @hp -= total.to_i
     if hp > 0
       puts "#{@name} is hit for #{total.to_i} damage. #{@name} has #{@hp} health remaining.\n\n"
