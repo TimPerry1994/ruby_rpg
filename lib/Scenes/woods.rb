@@ -18,7 +18,9 @@ class Woods < Scene
     if Lexicon.instance_variable_get(:@throws).include?(verb)
       $player.unequip_weapon(@stick)
       @stick.inventory = false
-      if @bear_alive == true
+      if @bear_alive == true && @bear_position != 'center'
+        bear_fight
+      elsif @bear_alive == true
         throw_stick_scenario
       else
         puts "You throw the stick away. It doesn't go far."
