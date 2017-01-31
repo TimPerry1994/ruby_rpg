@@ -4,8 +4,7 @@ require "./lib/Scenes/character_creation.rb"
 class Woods < Scene
 
   def initialize
-    @@stick = WoodenStick.new
-    @@jerkin = LeatherJerkin.new
+    super
     @bear = Bear.new
     @bear_alive = true
     @stick_taken = false
@@ -107,15 +106,15 @@ class Woods < Scene
 
         stick_scenario(choice.verb)
 
-      elsif Lexicon.instance_variable_get(:@compass).include?(choice.object)
+      elsif Lexicon.instance_variable_get(:@movements).include?(choice.verb) && Lexicon.instance_variable_get(:@compass).include?(choice.object)
         if choice.object == @bear_position
           puts "You run into the bear."
           bear_fight
+        elsif choice.object == 'north'
+          go('north')
         else
-          @direction_traveled = choice.object
-          $player.dead("You go #{@direction_traveled}, and decide to call it a day. (No areas have been developed beyond this point)")
+          puts "There is nothing of note this way."
         end
-
       else
         puts "You don't think that's a good idea."
       end

@@ -6,6 +6,14 @@ require "./lib/Equipment/armors.rb"
 
 class Scene
 
+  def initialize
+    @paths = {}
+    @@stick = WoodenStick.new
+    @@jerkin = LeatherJerkin.new
+  end
+
+  attr_reader :paths
+
   def user_input
     begin
       print "\n>"
@@ -17,6 +25,13 @@ class Scene
       lex = Lexicon.scan('gibberis ibberis')
       output = Parser.parse_sentence(lex)
     else
+
+      if Lexicon.instance_variable_get(:@inspects).include?(output.verb) && Lexicon.instance_variable_get(:@selfs).include?(output.object)
+        puts "\nName: #{$player.name}\nCurrent hp: #{$player.hp}\nMax hp: #{$player.hpmax}\nDamage: #{$player.damage}
+Defense: #{$player.defense}\nCritical Chance: #{$player.crit}%\nWeapon: #{$player.get_weapon}
+Armor: #{$player.get_armor}\n\n"
+      end
+
       return output
     end
   end
@@ -35,5 +50,15 @@ class Scene
       return output.object
     end
   end
+
+  def go(direction)
+    @paths[direction].start
+  end
+
+  def add_paths(paths)
+    @paths.update(paths)
+  end
+
+
 
 end

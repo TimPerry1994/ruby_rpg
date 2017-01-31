@@ -5,11 +5,11 @@ class Character
 
   @special = false
 
-  def initialize(name, hp, damag, defense, crit)
+  def initialize(name, hp, damage, defense, crit)
     @name = name
     @hp = hp
     @hpmax = hp
-    @damage = damag
+    @damage = damage
     @defense = defense
     @crit = crit
   end
@@ -38,7 +38,7 @@ class Character
   def hurt(number)
     total = number - (@defense/2)
     @hp -= total.to_i
-    if hp >= 0
+    if hp > 0
       puts "#{@name} is hit for #{total.to_i} damage. #{@name} has #{@hp} health remaining.\n\n"
     else
       puts "#{@name} is hit for #{total.to_i} damage. #{@name} is killed.\n\n"
@@ -154,6 +154,14 @@ class Player < Character
     end
   end
 
+  def get_weapon
+    return @weapon.instance_variable_get(:@name)
+  end
+
+  def get_armor
+    return @armor.instance_variable_get(:@name)
+  end
+
 end
 
 class Bear < Character
@@ -186,4 +194,35 @@ class Bear < Character
     puts "The bear has calmed down..."
   end
 
+end
+
+class Skeleton < Character
+
+  def initialize
+    @name = "Skeleton"
+    @hp = 12
+    @damage = 6
+    @defense = 4
+    @crit = 10
+  end
+end
+
+class SkeletonBoss < Character
+  def initialize
+    @name = "Skeleton"
+    @hp = 24
+    @damage = 6
+    @defense = 4
+    @crit = 20
+  end
+end
+
+class Zombie < Character
+  def initialize
+    @name = "Zombie"
+    @hp = 15
+    @damage = 4
+    @defense = 5
+    @crit = 15
+  end
 end

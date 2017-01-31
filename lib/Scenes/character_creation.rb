@@ -2,7 +2,7 @@ require_relative '../Characters/character.rb'
 require "./lib/Scenes/scene.rb"
 class CharacterCreation < Scene
 
-  def self.start
+  def start
 
   i = 0
 
@@ -87,5 +87,7 @@ class CharacterCreation < Scene
   end
   $player = Player.new(name, hp, damage, defense, crit)
   puts "You are now ready to start your adventure. Good luck!"
+  go('west')
+  puts go('west')
 end
 end
