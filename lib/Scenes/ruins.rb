@@ -17,7 +17,7 @@ class Ruins < Scene
 
   def zombie_fight
     while @zombie_alive == true
-      $player.fight(@zombie)
+      $player.battle(@zombie)
       if @zombie.hp <= 0
         puts "You successfully kill the zombie, but in the ensuing chaos the campfire has been destroyed."
         @zombie_alive = false
@@ -49,14 +49,17 @@ class Ruins < Scene
       if @skeleton1.hp <= 0
         @skeleton1_alive = false
         puts "As the skeleton dies, a second one rises and takes its place."
+      else
+        break
       end
     end
     if @skeleton2_alive == true
       $player.battle(@skeleton2)
-      if @skeleton1.hp <= 0
-        @skeleton1_alive = false
+      if @skeleton2.hp <= 0
+        @skeleton2_alive = false
       end
-    elsif @skeleton1_alive == false && @skeleton2_alive == false
+    end
+    if @skeleton1_alive == false && @skeleton2_alive == false
       puts "You see a passageway further into the crypt. Do you go down? (y/n)"
       print "\n>"
       decision = $stdin.gets.chomp
@@ -72,20 +75,21 @@ class Ruins < Scene
   def start
     i=0
     while i==0
-      puts "You are in some spooky ruins. You see a path to the south. There is a campfire to your left, and a crypt to your right."
+      puts "\nYou are in some spooky ruins. You see a path to the south. There is a campfire to your left, and a crypt to your right."
       choice = user_input
+      puts "\n"
       if Lexicon.instance_variable_get(:@movements).include?(choice.verb) && Lexicon.instance_variable_get(:@directions).include?(choice.object)
         if choice.object == 'south'
           go('south')
         elsif choice.object == 'left'
           @campcount += 1
           if @campcount < 3
-            puts "You rest by the campfire, and feel completely refreshed."
+            puts "You rest by the campfire, and feel completely refreshed.\n"
             $player.heal(99)
-          elsif campcount == 3
+          elsif @campcount == 3
             puts "You rest by the campfire..."
             $player.heal(3)
-            puts "While you are resting, you are attacked by a zombie!"
+            puts "\nWhile you are resting, you are attacked by a zombie!"
             zombie_fight
           else
             puts "Your encounter with the zombie destroyed the campfire."
@@ -95,7 +99,7 @@ class Ruins < Scene
         else
           puts "There is nothing of interest this way"
         end
-      elsif Lexicon.instance_variable_get(:@inspects).include?(choice.verb) && (choice.object == 'crypt' || choice.object == 'left')
+      elsif Lexicon.instance_variable_get(:@inspects).include?(choice.verb) && (choice.object == 'crypt' || choice.object == 'right')
         inspect_crypt
       else
         puts "Invalid command."
