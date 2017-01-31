@@ -1,6 +1,7 @@
 require "./lib/lexicon.rb"
 require "./lib/parser.rb"
 require "./lib/Characters/character.rb"
+require "./lib/Equipment/weapons.rb"
 
 class Scene
 

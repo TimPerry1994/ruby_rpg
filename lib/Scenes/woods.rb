@@ -5,6 +5,7 @@ class Woods < Scene
 
   def initialize
     @bear = Bear.new
+    @stick = WoodenStick.new
     @bear_alive = true
     @stick_taken = false
     @direction_travelled = nil

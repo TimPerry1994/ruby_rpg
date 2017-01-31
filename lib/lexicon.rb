@@ -4,6 +4,7 @@ class Lexicon
     @compass = %w[north south east west]
     @verbs = %w[stop eat jab poke prod gibberis]
     @equips = %w[equip don wear wield]
+    @grabs = %w[take grab]
     @throws = %w[throw hurl chuck lob]
     @movements = %w[go run walk stroll]
     @stop_words = %w[the in of from at it to]
@@ -14,7 +15,7 @@ class Lexicon
     @fights = %w[fight attack hit stab slash kill whack smack kick punch slap battle]
     @flees = %w[flee escape run]
 
-    @verbs.push(*@throws, *@movements, *@equips)
+    @verbs.push(*@throws, *@movements, *@equips, *@grabs)
     @directions.push(*@compass)
     @nouns.push(*@weapons, *@armors)
 

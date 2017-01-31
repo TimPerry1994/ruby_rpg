@@ -57,11 +57,7 @@ class Parser
     elsif peek(word_list) == 'fight'
       return match(word_list, 'fight')
     else
-      begin
-        raise ParserError.new("That is not a valid command.")
-      rescue ParserError=>e
-        return ['error', 'verb']
-      end
+      raise ParserError.new("Expected a verb next")
     end
   end
 
@@ -88,8 +84,7 @@ class Parser
     elsif (next_word == 'verb' || next_word == 'fight')
       return ['player', 'noun']
     else
-      raise ParserError.new("Expected a subject next")
-      return ['error', 'noun']
+      return ['player', 'noun']
     end
   end
 

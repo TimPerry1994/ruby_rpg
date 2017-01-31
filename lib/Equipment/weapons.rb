@@ -2,6 +2,7 @@ class Weapon
 
   def initialize
     @str = 0
+    @crit = 0
     @inventory = false
   end
 
@@ -20,6 +21,7 @@ class WoodenStick < Weapon
 
   def initialize
     @str = 2
+    @crit = 0
     inventory = false
   end
 end
