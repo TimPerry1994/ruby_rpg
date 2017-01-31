@@ -20,6 +20,6 @@ class LeatherJerkin < Armor
     @def = 2
     @hp = 1
     @inventory = false
-    @name = 'leather_jerkin'
+    @name = 'Leather Jerkin'
   end
 end

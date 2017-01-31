@@ -1,14 +1,15 @@
 require_relative '../Equipment/weapons.rb'
+require_relative '../Equipment/armors.rb'
 
 class Character
 
   @special = false
 
-  def initialize(name, hp, damage, defense, crit)
+  def initialize(name, hp, damag, defense, crit)
     @name = name
     @hp = hp
     @hpmax = hp
-    @damage = damage
+    @damage = damag
     @defense = defense
     @crit = crit
   end
@@ -18,7 +19,7 @@ class Character
   attr_accessor :damage
   attr_accessor :defense
   attr_accessor :crit
-  attr_reader :hpmax
+  attr_accessor :hpmax
 
   def attack(character)
     #Attack an enemy
@@ -100,18 +101,31 @@ class Player < Character
     if weapon == @weapon
       puts "That is already equipped."
     elsif weapon.instance_variable_get(:@inventory) == true
-      puts "You equip the weapon, it has #{weapon.instance_variable_get(:@str)} damage and an extra #{weapon.instance_variable_get(:@crit)} critical chance"
-      if @weapon == nil
-        self.crit += weapon.instance_variable_get(:@crit)
-        self.damage += weapon.instance_variable_get(:@str)
-        @weapon = weapon
-      else
-        self.crit -= @weapon.instance_variable_get(:@crit)
-        self.damage -= @weapon.instance_variable_get(:@str)
-        self.crit += weapon.instance_variable_get(:@crit)
-        self.damage += weapon.instance_variable_get(:@str)
-        @weapon = weapon
+      puts "You equip the weapon, it has #{weapon.instance_variable_get(:@str)} damage and an extra #{weapon.instance_variable_get(:@crit)}% critical chance"
+      self.crit += weapon.instance_variable_get(:@crit)
+      self.damage += weapon.instance_variable_get(:@str)
+      if @weapon != nil
+        self.unequip_weapon(@weapon)
       end
+      @weapon = weapon
+    else
+      puts "You cannot equip that."
+    end
+  end
+
+  def equip_armor(armor)
+    if armor == @armor
+      puts "That is already equipped."
+    elsif armor.instance_variable_get(:@inventory) == true
+      puts "You equip the armor, it has #{armor.instance_variable_get(:@def)} damage and an extra #{armor.instance_variable_get(:@hp)} hp"
+
+      self.defense += armor.instance_variable_get(:@def)
+      self.hpmax += armor.instance_variable_get(:@hp)
+      self.hp += armor.instance_variable_get(:@hp)
+      if @armor != nil
+        self.unequip_armor(@armor)
+      end
+      @armor = armor
     else
       puts "You cannot equip that."
     end
@@ -120,12 +134,25 @@ class Player < Character
   def unequip_weapon(weapon)
     if weapon == @weapon
       self.damage -= @weapon.instance_variable_get(:@str)
+      self.crit -= @weapon.instance_variable_get(:@crit)
       @weapon = nil
     else
       puts " "
     end
   end
 
+  def unequip_armor(armor)
+    if armor == @armor
+      self.defense -= @armor.instance_variable_get(:@def)
+      self.hpmax -= @armor.instance_variable_get(:@hp)
+      self.hp -= @armor.instance_variable_get(:@hp)
+      if self.hp <= 0
+        self.hp = 1
+      end
+    else
+      puts " "
+    end
+  end
 
 end
 

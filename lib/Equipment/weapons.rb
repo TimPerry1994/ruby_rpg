@@ -25,7 +25,7 @@ class WoodenStick < Weapon
   def initialize
     @str = 2
     @crit = 0
-    inventory = false
-    @name = 'stick'
+    @inventory = false
+    @name = 'Wooden Stick'
   end
 end

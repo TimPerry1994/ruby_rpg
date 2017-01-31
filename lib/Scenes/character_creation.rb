@@ -69,7 +69,7 @@ class CharacterCreation < Scene
     defense.to_i
     crit.to_i
 
-    puts "Your stats are as follows: \n\nName: #{name}\nHitpoints: #{hp}\nDamage: #{damage}\nDefense: #{defense}\nCritical Chance: #{crit}\n\n"
+    puts "Your stats are as follows: \n\nName: #{name}\nHitpoints: #{hp}\nDamage: #{damage}\nDefense: #{defense}\nCritical Chance: #{crit}%\n\n"
     choice = "i"
     puts "Are you happy with these choices? (y/n)"
     while choice != "y" && choice != "n"

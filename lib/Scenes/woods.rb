@@ -4,8 +4,9 @@ require "./lib/Scenes/character_creation.rb"
 class Woods < Scene
 
   def initialize
+    @@stick = WoodenStick.new
+    @@jerkin = LeatherJerkin.new
     @bear = Bear.new
-    @stick = WoodenStick.new
     @bear_alive = true
     @stick_taken = false
     @direction_travelled = nil
@@ -16,8 +17,8 @@ class Woods < Scene
 
   def stick_scenario(verb)
     if Lexicon.instance_variable_get(:@throws).include?(verb)
-      $player.unequip_weapon(@stick)
-      @stick.inventory = false
+      $player.unequip_weapon(@@stick)
+      @@stick.inventory = false
       if @bear_alive == true && @bear_position != 'center'
         bear_fight
       elsif @bear_alive == true
@@ -31,16 +32,16 @@ class Woods < Scene
       if @bear_position != "center" && @bear_alive == true
         bear_fight
       else
-        @stick.inventory = true
+        @@stick.inventory = true
         @stick_taken = true
       end
 
     elsif Lexicon.instance_variable_get(:@equips).include?(verb)
-      if @bear_position != "center" && @bear_alive == true && @stick.inventory == false
+      if @bear_position != "center" && @bear_alive == true && @@stick.inventory == false
         bear_fight
       else
-        @stick.inventory = true
-        $player.equip_weapon(@stick)
+        @@stick.inventory = true
+        $player.equip_weapon(@@stick)
         @stick_taken = true
       end
     else
@@ -56,11 +57,13 @@ class Woods < Scene
       choice = user_input_verb("throw")
 
       if Lexicon.instance_variable_get(:@compass).include?(choice)
-        puts "You throw the stick to the #{choice}. The bear goes after it, revealing a leather jerkin it was sitting on. You pick it up"
+        puts "You throw the stick to the #{choice}. The bear goes after it, revealing a leather jerkin it was sitting on. You put it on."
         @bear_position = choice.downcase
         @stick_taken = true
-        $player.unequip_weapon(@stick)
-        @stick.inventory = false
+        $player.unequip_weapon(@@stick)
+        @@jerkin.inventory = true
+        $player.equip_armor(@@jerkin)
+        @@stick.inventory = false
         i = 1
       else
         puts "That is not a valid direction"
