@@ -8,8 +8,8 @@ class CharacterCreation < Scene
 
   while i == 0
   hp = 10
-  damage = 4
-  defense = 4
+  damage = 3
+  defense = 3
   crit = 10
 
     puts "You are an adventurer, lost in the woods. What is your name?"

@@ -58,10 +58,9 @@ end
 
 class Player < Character
 
-  def initialize
-    @weapon = nil
-    @armor = nil
-  end
+  @weapon = nil
+  @armor = nil
+
 
   def dead(reason)
     puts "\n#{reason} \nGame Over."
@@ -71,7 +70,7 @@ class Player < Character
   def battle(enemy)
 
     puts "You have encountered #{enemy.name}."
-    while @hp > 0 && enemy.hp > 0
+    while self.hp > 0 && enemy.hp > 0
 
       puts "Will you fight or flee?"
       print "\n>"

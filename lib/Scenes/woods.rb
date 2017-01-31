@@ -64,13 +64,13 @@ class Woods < Scene
           puts "You throw the stick far away. You feel a pang of regret as you will never see another stick so perfect."
         end
 
-      elsif Lexicon.instance_variable_get(:@directions).include?(choice.object)
+      elsif Lexicon.instance_variable_get(:@compass).include?(choice.object)
         if choice.object == @bear_position
           puts "You run into the bear."
           bear_fight
         else
           @direction_traveled = choice.object
-          dead("You go #{@direction_traveled}", and decide to call it a day.)
+          dead("You go #{@direction_traveled}, and decide to call it a day.")
         end
 
       else
