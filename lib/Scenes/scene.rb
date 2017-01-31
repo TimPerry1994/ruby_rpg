@@ -13,7 +13,7 @@ class Scene
       output = Parser.parse_sentence(lex)
     rescue ParserError=>e
       puts "Error: #{e}"
-      lex = Lexicon.scan('ibberis gibberis ibberis')
+      lex = Lexicon.scan('gibberis ibberis')
       output = Parser.parse_sentence(lex)
     else
       return output

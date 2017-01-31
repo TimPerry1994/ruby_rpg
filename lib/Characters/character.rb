@@ -1,3 +1,5 @@
+require_relative '../Equipment/weapons.rb'
+
 class Character
 
   @special = false
@@ -95,15 +97,32 @@ class Player < Character
   end
 
   def equip_weapon(weapon)
-    if weapon.instance_variable_get(:@inventory) == true
+    if weapon == @weapon
+      puts "That is already equipped."
+    elsif weapon.instance_variable_get(:@inventory) == true
+      puts "You equip the weapon, it has #{weapon.instance_variable_get(:@str)} damage and an extra #{weapon.instance_variable_get(:@crit)} critical chance"
       if @weapon == nil
-        damage += weapon.instance_variable_get(:@str)
+        self.crit += weapon.instance_variable_get(:@crit)
+        self.damage += weapon.instance_variable_get(:@str)
+        @weapon = weapon
       else
-        damage -= @weapon.instance_variable_get(:@str)
-        damage += weapon.instance_variable_get(:@str)
+        self.crit -= @weapon.instance_variable_get(:@crit)
+        self.damage -= @weapon.instance_variable_get(:@str)
+        self.crit += weapon.instance_variable_get(:@crit)
+        self.damage += weapon.instance_variable_get(:@str)
+        @weapon = weapon
       end
     else
       puts "You cannot equip that."
+    end
+  end
+
+  def unequip_weapon(weapon)
+    if weapon == @weapon
+      self.damage -= @weapon.instance_variable_get(:@str)
+      @weapon = nil
+    else
+      puts " "
     end
   end
 

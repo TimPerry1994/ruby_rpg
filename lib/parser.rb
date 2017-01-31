@@ -58,6 +58,7 @@ class Parser
       return match(word_list, 'fight')
     else
       raise ParserError.new("Expected a verb next")
+      return ['error','verb']
     end
   end
 
@@ -79,13 +80,8 @@ class Parser
     skip(word_list, 'stop')
     next_word = peek(word_list)
 
-    if next_word == 'noun'
-      return match(word_list, 'noun')
-    elsif (next_word == 'verb' || next_word == 'fight')
-      return ['player', 'noun']
-    else
-      return ['player', 'noun']
-    end
+    return ['player', 'noun']
+
   end
 
   def self.parse_number(word_list)
