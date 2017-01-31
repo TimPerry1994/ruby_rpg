@@ -110,7 +110,7 @@ class Woods < Scene
           bear_fight
         else
           @direction_traveled = choice.object
-          dead("You go #{@direction_traveled}, and decide to call it a day.")
+          dead("You go #{@direction_traveled}, and decide to call it a day. (No areas have been developed beyond this point)")
         end
 
       else
