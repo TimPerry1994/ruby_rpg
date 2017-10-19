@@ -6,7 +6,9 @@ pipeline {
     }
     stages {
         stage('Build') {
-            sh 'lib/runner.rb'
+		steps {
+			sh 'lib/runner.rb'
+		}
         }
     }
 }
