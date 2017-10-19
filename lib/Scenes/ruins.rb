@@ -50,7 +50,7 @@ class Ruins < Scene
         @skeleton1_alive = false
         puts "As the skeleton dies, a second one rises and takes its place."
       else
-        break
+        
       end
     end
     if @skeleton2_alive == true
